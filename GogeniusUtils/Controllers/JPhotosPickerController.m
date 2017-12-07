@@ -18,7 +18,7 @@
 @implementation PhotosAssetsCollectionViewLayout
 
 - (instancetype)init {
-    self = [super init]; 
+    self = [super init];
     if (self) {
         self.minimumLineSpacing = 5.0;
         self.minimumInteritemSpacing = 5.0;
@@ -104,7 +104,7 @@
         _sureButton.backgroundColor = [UIColor colorWithHexString:@"c1c1c1" alpha:1];
     }
     
-    _countLabel.text = [NSString stringWithFormat:@"确定\n%@/%@",@(assets.count),@(self.maxNumber)];    
+    _countLabel.text = [NSString stringWithFormat:@"确定\n%@/%@",@(assets.count),@(self.maxNumber)];
     [_container makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_container removeAllObjects];
     
@@ -119,9 +119,9 @@
         item.imageView.contentMode = UIViewContentModeScaleAspectFill;
         _scrollView.contentSize = CGSizeMake(MAX(_scrollView.width + 1, item.right + 1), _scrollView.height);
         
-        PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];  
+        PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
         option.resizeMode = PHImageRequestOptionsResizeModeExact;
-        option.networkAccessAllowed = YES; 
+        option.networkAccessAllowed = YES;
         [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(item.bounds.size.width*2, item.bounds.size.height*2) contentMode:PHImageContentModeAspectFill options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             [item setBackgroundImage:result forState:UIControlStateNormal];
         }];
@@ -190,11 +190,11 @@
 - (void)setAsset:(PHAsset *)asset {
     _asset = asset;
     
-    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];  
+    PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
     option.resizeMode = PHImageRequestOptionsResizeModeExact;
-    option.networkAccessAllowed = YES; 
+    option.networkAccessAllowed = YES;
     [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:CGSizeMake(_imageView.bounds.size.width * 2, _imageView.bounds.size.height * 2) contentMode:PHImageContentModeAspectFill options:option resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-        _imageView.image = result; 
+        _imageView.image = result;
     }];
 }
 
@@ -235,10 +235,13 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)initializeCollectionViewWithLayout:(UICollectionViewLayout *)layout {
     
-    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 70) collectionViewLayout:layout];
+    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    [self.view addSubview:self.collectionView];
     
     // Register cell class
     [self.collectionView registerClass:[PhotosCollectionViewCell class]
@@ -246,6 +249,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.allowsMultipleSelection = YES;
     
     self.collectionView.alwaysBounceVertical = YES;
+    
     if (self.collectionView.contentSize.height <= self.collectionView.frame.size.height) {
         [self.collectionView setContentSize:CGSizeMake(self.collectionView.contentSize.width, self.collectionView.contentSize.height+1)];
     }
@@ -255,9 +259,7 @@ static NSString * const reuseIdentifier = @"Cell";
     _bottomView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:_bottomView];
     
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height - _bottomView.height);
-    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:self.collectionView];
+    //    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, self.view.frame.size.height - _bottomView.height);
 }
 
 - (void)setMaxNumberOfSelection:(NSInteger)maxNumberOfSelection {
@@ -284,9 +286,16 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    _collectionView.height = self.view.height - 70 - self.view.safeAreaInsets.bottom;
+    _bottomView.top = _collectionView.bottom;
+    _bottomView.height = 70 + self.view.safeAreaInsets.bottom;
+}
+
 - (PHFetchResult *)getPhotosResult {
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];  
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
     return [PHAsset fetchAssetsWithMediaType:self.mediaType options:options];
 }
 
@@ -352,7 +361,7 @@ static NSString * const reuseIdentifier = @"Cell";
     _bottomView.assets = _selectedArray;
 }
 
-#pragma mark ----- delegate 
+#pragma mark ----- delegate
 
 - (void)bottomContainerSure {
     if (_finishedBlock) {
@@ -362,3 +371,4 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 @end
+
