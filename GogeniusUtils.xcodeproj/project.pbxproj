@@ -31,7 +31,6 @@
 		37D62A171FB3F852008C8337 /* JPlaceholderTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D629D31FB3F852008C8337 /* JPlaceholderTextView.h */; };
 		37D62A181FB3F852008C8337 /* JLoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D629D41FB3F852008C8337 /* JLoopScrollView.m */; };
 		37D62A191FB3F852008C8337 /* JOnePixLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D629D51FB3F852008C8337 /* JOnePixLineView.h */; };
-		37D62A1A1FB3F852008C8337 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37D629D61FB3F852008C8337 /* Info.plist */; };
 		37D62A1B1FB3F852008C8337 /* JUtil.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37D629D71FB3F852008C8337 /* JUtil.bundle */; };
 		37D62A1C1FB3F852008C8337 /* JDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D629D91FB3F852008C8337 /* JDataModel.m */; };
 		37D62A1D1FB3F852008C8337 /* JEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D629DA1FB3F852008C8337 /* JEntity.h */; };
@@ -378,7 +377,7 @@
 		37F7B6551FB3ED6100AF8649 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = GOGenius;
 				TargetAttributes = {
 					37F7B65D1FB3ED6100AF8649 = {
@@ -410,7 +409,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37D62A1B1FB3F852008C8337 /* JUtil.bundle in Resources */,
-				37D62A1A1FB3F852008C8337 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
