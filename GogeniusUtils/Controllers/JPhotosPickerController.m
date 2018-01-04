@@ -10,6 +10,7 @@
 #import "UIView+frame.h"
 #import "UIColor+hex.h"
 #import "JHud.h"
+#import "UIAlertController+block.h"
 
 @interface PhotosAssetsCollectionViewLayout : UICollectionViewFlowLayout
 
@@ -282,7 +283,13 @@ static NSString * const reuseIdentifier = @"Cell";
             }
         }];
     } else if (status != PHAuthorizationStatusAuthorized) {
-        [JHud showContent:@"相册权限受限"];
+//        [JHud showContent:@"相册权限受限"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"无法访问相册" message:@"请在iPhone的“设置-隐私-相册”选项中，允许易慧家访问你的相册。" actionTitles:@[@"确定"] cancelButtonTitle:nil preferredStyle:UIAlertControllerStyleAlert clickedIndex:^(NSInteger index) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [self presentViewController:alertController animated:YES completion:nil];
+        });
     }
 }
 
