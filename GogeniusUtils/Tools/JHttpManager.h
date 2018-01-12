@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <AFNetworking/AFNetworking.h>
 
-typedef NS_ENUM(NSUInteger, NetworkStatus) {
+typedef NS_ENUM(NSInteger, NetworkStatus) {
     NetworkStatusUnknown          = -1,
     NetworkStatusNotReachable     = 0,
     NetworkStatusReachableViaWWAN  = 1,
