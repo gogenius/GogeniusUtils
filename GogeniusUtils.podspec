@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GogeniusUtils"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "Utils"
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -52,9 +52,9 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Liang Jiange" => "bluedream5161@gmail.com" }
+  s.author             = { "zhangyong" => "yong.zhang@gogen.com.cn" }
   # Or just: s.author    = ""
-  # s.authors            = { "" => "bluedream5161@gmail.com" }
+  # s.authors            = { "" => "yong.zhang@gogen.com.cn" }
   # s.social_media_url   = "http://twitter.com/"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

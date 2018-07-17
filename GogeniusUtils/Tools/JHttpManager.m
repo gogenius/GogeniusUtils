@@ -103,6 +103,26 @@
     return task;
 }
 
++ (NSURLSessionDataTask *)postRequest:(NSString *)url body:(NSData *)bodyData result:(void(^)(id resultObject))result failure:(void(^)(NSError *error))failure {
+    AFHTTPSessionManager *manager = [self manager];
+    
+    NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"POST" URLString:url parameters:nil error:nil];
+    request.timeoutInterval = 15;
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setHTTPBody:bodyData];
+    NSURLSessionDataTask *task = [[self manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            failure(error);
+        } else {
+            result(responseObject);
+        }
+    }];
+    [task resume];
+    return task;
+}
+
+
 + (NSURLSessionDataTask *)__requestWithMethod:(HTTPMethod)method withParam:(NSDictionary *)param withUrl:(NSString *)url result:(void(^)(NSURLSessionDataTask *task,id resultObject))result failure:(void(^)(NSURLSessionDataTask *task, NSError *error))failure {
     
     AFHTTPSessionManager *manager = [self manager];
