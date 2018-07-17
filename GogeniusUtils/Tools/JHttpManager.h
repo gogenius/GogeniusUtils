@@ -66,4 +66,17 @@ typedef void(^NetworkChangeBlock)(NetworkStatus status);
 + (NSURLSessionDownloadTask *)downloadWithParam:(NSDictionary *)param withUrl:(NSString *)url progress:(void(^)(CGFloat progress))progress destination:(NSURL * (^)(void))destination result:(void(^)(NSURL *filePath))result failure:(void(^)(NSError *error))failure;
 
 
+
+/**
+ post请求
+
+ @param url url
+ @param bodyData body参数
+ @param result 结果
+ @param failure 结果
+ @return 结果
+ */
++ (NSURLSessionDataTask *)postRequest:(NSString *)url body:(NSData *)bodyData result:(void(^)(id resultObject))result failure:(void(^)(NSError *error))failure;
+
+
 @end

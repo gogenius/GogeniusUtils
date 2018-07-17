@@ -106,11 +106,11 @@
             [dic setObject:_nextKeyValue forKey:[self nextValueKey]];
         }
         
-        [[self httpManager] requestWithMethod:[self method] withParam:dic withUrl:[self requestUrl] result:^(id result) {
-            
+        NSData *bodyData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        
+        [[self httpManager] postRequest:[self requestUrl] body:bodyData result:^(id result) {
             self.loading = NO;
             finishedBlock([self phaseData:result]);
-            
         } failure:^(NSError *error) {
             self.loading = NO;
             failureBlock(error);
