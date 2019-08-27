@@ -16,13 +16,12 @@
 
 + (void)monitorNetworkStatus:(NetworkChangeBlock)block {
     AFNetworkReachabilityManager *afReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    [afReachabilityManager startMonitoring];
     [afReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        
         if (block) {
             block(status);
         }
     }];
-    [afReachabilityManager startMonitoring];
 }
 
 + (void)stopMonitoring {
