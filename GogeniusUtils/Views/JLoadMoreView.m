@@ -27,6 +27,9 @@
     if (self) {
         
         _aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        if (@available(iOS 13.0, *)) {
+            _aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
+        }
         _aiView.transform = CGAffineTransformMakeScale(18.0f/_aiView.width, 18.0f/_aiView.width);
         [self addSubview:_aiView];
         
