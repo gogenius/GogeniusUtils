@@ -28,7 +28,7 @@ HorizontalEdgeInsets HorizontalEdgeInsetsMake(CGFloat x,CGFloat y) {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        self.backgroundColor = [UIColor whiteColor];
         _sepLineView = [[JOnePixLineView alloc] initWithFrame:CGRectMake(0.f, self.height-1, self.width, 1)];
         _sepLineView.lineColor = [UIColor colorWithHexString:@"e1e1e1" alpha:1];
         _sepLineView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleWidth;
